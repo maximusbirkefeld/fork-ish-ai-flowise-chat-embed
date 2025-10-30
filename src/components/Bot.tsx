@@ -1745,7 +1745,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         >
           <audio class="block bg-cover bg-center w-full h-full rounded-none text-transparent" controls src={item.data as string} />
           <button class="w-7 h-7 flex items-center justify-center bg-transparent p-1" onClick={() => handleDeletePreview(item)}>
-            <TrashIcon color="white" />
+            <TrashIcon style={{ color: 'white' }} />
           </button>
         </div>
       );
@@ -1824,13 +1824,14 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
               </Show>
               <div style={{ flex: 1 }} />
               <DeleteButton
+                aria-label="Reset chat"
                 sendButtonColor={props.bubbleTextColor}
                 type="button"
                 isDisabled={messages().length === 1}
                 class="my-2 ml-2"
                 on:click={clearChat}
               >
-                <span style={{ 'font-family': 'Poppins, sans-serif' }}>Clear</span>
+                Reset chat
               </DeleteButton>
             </div>
           ) : null}
@@ -1977,24 +1978,31 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
                     >
                       <div class="flex items-center gap-3 px-4 py-2">
                         <span>
-                          <CircleDotIcon color="red" />
+                          <CircleDotIcon style={{ color: 'red' }} />
                         </span>
                         <span>{elapsedTime() || '00:00'}</span>
                         {isLoadingRecording() && <span class="ml-1.5">Sending...</span>}
                       </div>
                       <div class="flex items-center">
-                        <CancelButton buttonColor={props.textInput?.sendButtonColor} type="button" class="m-0" on:click={onRecordingCancelled}>
-                          <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
-                        </CancelButton>
-                        <SendButton
-                          sendButtonColor={props.textInput?.sendButtonColor}
+                        <CancelButton
+                          aria-label="Cancel recording"
+                          buttonColor={props.textInput?.sendButtonColor}
                           type="button"
-                          isDisabled={loading()}
                           class="m-0"
-                          on:click={onRecordingStopped}
+                          on:click={onRecordingCancelled}
                         >
-                          <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
-                        </SendButton>
+                          Cancel recording
+                        </CancelButton>
+                          <SendButton
+                            aria-label="Send recording"
+                            sendButtonColor={props.textInput?.sendButtonColor}
+                            type="button"
+                            isDisabled={loading()}
+                            class="m-0"
+                            on:click={onRecordingStopped}
+                          >
+                            Send recording
+                          </SendButton>
                       </div>
                     </div>
                   )}

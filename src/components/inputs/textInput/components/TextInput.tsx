@@ -158,13 +158,14 @@ export const TextInput = (props: TextInputProps) => {
         {props.uploadsConfig?.isImageUploadAllowed ? (
           <>
             <ImageUploadButton
+              aria-label="Image upload"
               buttonColor={props.sendButtonColor}
               type="button"
               class="m-0 h-14 flex items-center justify-center"
               isDisabled={props.disabled || isSendButtonDisabled()}
               on:click={handleImageUploadClick}
             >
-              <span style={{ 'font-family': 'Poppins, sans-serif' }}>Image Upload</span>
+              Image upload
             </ImageUploadButton>
             <input
               style={{ display: 'none' }}
@@ -183,13 +184,14 @@ export const TextInput = (props: TextInputProps) => {
         {props.uploadsConfig?.isRAGFileUploadAllowed || props.isFullFileUpload ? (
           <>
             <AttachmentUploadButton
+              aria-label="File upload"
               buttonColor={props.sendButtonColor}
               type="button"
               class="m-0 h-14 flex items-center justify-center"
               isDisabled={props.disabled || isSendButtonDisabled()}
               on:click={handleFileUploadClick}
             >
-              <span style={{ 'font-family': 'Poppins, sans-serif' }}>File Upload</span>
+              File upload
             </AttachmentUploadButton>
             <input
               style={{ display: 'none' }}
@@ -211,23 +213,25 @@ export const TextInput = (props: TextInputProps) => {
         />
         {props.uploadsConfig?.isSpeechToTextEnabled ? (
           <RecordAudioButton
+            aria-label="Start audio recording"
             buttonColor={props.sendButtonColor}
             type="button"
             class="m-0 start-recording-button h-14 flex items-center justify-center"
             isDisabled={props.disabled || isSendButtonDisabled()}
             on:click={props.onMicrophoneClicked}
           >
-            <span style={{ 'font-family': 'Poppins, sans-serif' }}>Record Audio</span>
+            Record audio
           </RecordAudioButton>
         ) : null}
         <SendButton
+          aria-label="Send message"
           sendButtonColor={props.sendButtonColor}
           type="button"
           isDisabled={props.disabled || isSendButtonDisabled()}
           class="m-0 h-14 flex items-center justify-center"
           on:click={submit}
         >
-          <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
+          Send message
         </SendButton>
       </div>
     </div>
