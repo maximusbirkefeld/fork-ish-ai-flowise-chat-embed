@@ -1,6 +1,6 @@
 import { ShortTextInput } from './ShortTextInput';
 import { isMobile } from '@/utils/isMobileSignal';
-import { Show, createSignal, createEffect, onMount, Setter } from 'solid-js';
+import { Show, createSignal, createEffect, onMount, Setter, createMemo, createUniqueId } from 'solid-js';
 import { SendButton } from '@/components/buttons/SendButton';
 import { FileEvent, UploadsConfig } from '@/components/Bot';
 import { ImageUploadButton } from '@/components/buttons/ImageUploadButton';
@@ -42,6 +42,9 @@ export const TextInput = (props: TextInputProps) => {
   const [isSendButtonDisabled, setIsSendButtonDisabled] = createSignal(false);
   const [warningMessage, setWarningMessage] = createSignal('');
   const [inputHistory] = createSignal(new ChatInputHistory(() => props.maxHistorySize || 10));
+  const inputId = createUniqueId();
+  const placeholderText = createMemo(() => props.placeholder ?? 'Type your question');
+  const inputLabel = createMemo(() => props.placeholder ?? 'Nachricht an den Chat eingeben');
   let inputRef: HTMLInputElement | HTMLTextAreaElement | undefined;
   let fileUploadRef: HTMLInputElement | HTMLTextAreaElement | undefined;
   let imgUploadRef: HTMLInputElement | HTMLTextAreaElement | undefined;
@@ -201,13 +204,18 @@ export const TextInput = (props: TextInputProps) => {
             />
           </>
         ) : null}
+        <label for={inputId} class="sr-only">
+          {inputLabel()}
+        </label>
         <ShortTextInput
           ref={inputRef as HTMLTextAreaElement}
           onInput={handleInput}
           value={props.inputValue}
           fontSize={props.fontSize}
           disabled={props.disabled}
-          placeholder={props.placeholder ?? 'Type your question'}
+          id={inputId}
+          ariaLabel={inputLabel()}
+          placeholder={placeholderText()}
         />
         {props.uploadsConfig?.isSpeechToTextEnabled ? (
           <RecordAudioButton
