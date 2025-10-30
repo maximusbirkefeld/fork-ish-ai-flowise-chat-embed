@@ -1,5 +1,4 @@
-import { JSX, Show } from 'solid-js';
-import { Spinner } from '@/components';
+import { JSX } from 'solid-js/jsx-runtime';
 import { SendButton } from '@/components/buttons/SendButton';
 
 type LeadCaptureButtonProps = {
@@ -27,27 +26,17 @@ export const CancelLeadCaptureButton = (props: LeadCaptureButtonProps) => {
   );
 };
 
-const SaveLeadFallback = () => {
-  return (
-    <span class="flex items-center gap-2">
-      <Spinner class="text-white" />
-      Saving...
-    </span>
-  );
-};
-
 export const SaveLeadButton = (props: LeadCaptureButtonProps) => {
   return (
     <SendButton
+      aria-label="Submit lead form"
       sendButtonColor={props.buttonColor}
       type="submit"
       isDisabled={props.isDisabled || props.isLoading}
       class="m-0 h-14 flex items-center justify-center"
       {...props}
     >
-      <Show when={!props.isLoading} fallback={<SaveLeadFallback />}>
-        <span style={{ 'font-family': 'Poppins, sans-serif' }}>Submit</span>
-      </Show>
+      Submit lead form
     </SendButton>
   );
 };

@@ -476,7 +476,7 @@ export const BotBubble = (props: Props) => {
                           class="px-4 py-2 font-medium text-red-600 border border-red-600 rounded-full hover:bg-red-600 hover:text-white transition-colors duration-300 flex items-center space-x-2"
                           onClick={() => props.handleActionClick(action, props.message.action)}
                         >
-                          <XIcon isCurrentColor={true} />
+                          <XIcon style={{ color: 'currentColor' }} />
                           &nbsp;
                           {action.label}
                         </button>

@@ -13,60 +13,102 @@ type RatingButtonProps = {
 const defaultFeedbackColor = '#3B81F6';
 
 export const CopyToClipboardButton = (props: RatingButtonProps) => {
+  const {
+    feedbackColor,
+    isDisabled,
+    isLoading,
+    disableIcon,
+    children,
+    class: className,
+    ['aria-label']: ariaLabelProp,
+    ...rest
+  } = props;
+  const ariaLabel = ariaLabelProp ?? 'In Zwischenablage kopieren';
+
   return (
     <button
-      disabled={props.isDisabled || props.isLoading}
-      {...props}
-      class={
-        'p-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
-        props.class
-      }
+      disabled={isDisabled || isLoading}
+      aria-label={ariaLabel}
+      {...rest}
+      class={`p-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ${className ?? ''}`.trim()}
       style={{ background: 'transparent', border: 'none' }}
       title="Copy to clipboard"
     >
-      <Show when={!props.isLoading} fallback={<Spinner class="text-white" />}>
-        <ClipboardIcon color={props.feedbackColor ?? defaultFeedbackColor} class={'send-icon flex ' + (props.disableIcon ? 'hidden' : '')} />
+      <Show when={!isLoading} fallback={<Spinner class="text-white" />}>
+        <ClipboardIcon
+          class={`send-icon flex ${disableIcon ? 'hidden' : ''}`.trim()}
+          style={{ color: feedbackColor ?? defaultFeedbackColor }}
+        />
       </Show>
+      {children ? <span class="sr-only">{children}</span> : null}
     </button>
   );
 };
 
 export const ThumbsUpButton = (props: RatingButtonProps) => {
+  const {
+    feedbackColor,
+    isDisabled,
+    isLoading,
+    disableIcon,
+    children,
+    class: className,
+    ['aria-label']: ariaLabelProp,
+    ...rest
+  } = props;
+  const ariaLabel = ariaLabelProp ?? 'Positive Rückmeldung geben';
+
   return (
     <button
       type="submit"
-      disabled={props.isDisabled || props.isLoading}
-      {...props}
-      class={
-        'p-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
-        props.class
-      }
+      disabled={isDisabled || isLoading}
+      aria-label={ariaLabel}
+      {...rest}
+      class={`p-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ${className ?? ''}`.trim()}
       style={{ background: 'transparent', border: 'none' }}
       title="Thumbs Up"
     >
-      <Show when={!props.isLoading} fallback={<Spinner class="text-white" />}>
-        <ThumbsUpIcon color={props.feedbackColor ?? defaultFeedbackColor} class={'send-icon flex ' + (props.disableIcon ? 'hidden' : '')} />
+      <Show when={!isLoading} fallback={<Spinner class="text-white" />}>
+        <ThumbsUpIcon
+          class={`send-icon flex ${disableIcon ? 'hidden' : ''}`.trim()}
+          style={{ color: feedbackColor ?? defaultFeedbackColor }}
+        />
       </Show>
+      {children ? <span class="sr-only">{children}</span> : null}
     </button>
   );
 };
 
 export const ThumbsDownButton = (props: RatingButtonProps) => {
+  const {
+    feedbackColor,
+    isDisabled,
+    isLoading,
+    disableIcon,
+    children,
+    class: className,
+    ['aria-label']: ariaLabelProp,
+    ...rest
+  } = props;
+  const ariaLabel = ariaLabelProp ?? 'Negative Rückmeldung geben';
+
   return (
     <button
       type="submit"
-      disabled={props.isDisabled || props.isLoading}
-      {...props}
-      class={
-        'p-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
-        props.class
-      }
+      disabled={isDisabled || isLoading}
+      aria-label={ariaLabel}
+      {...rest}
+      class={`p-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ${className ?? ''}`.trim()}
       style={{ background: 'transparent', border: 'none' }}
       title="Thumbs Down"
     >
-      <Show when={!props.isLoading} fallback={<Spinner class="text-white" />}>
-        <ThumbsDownIcon color={props.feedbackColor ?? defaultFeedbackColor} class={'send-icon flex ' + (props.disableIcon ? 'hidden' : '')} />
+      <Show when={!isLoading} fallback={<Spinner class="text-white" />}>
+        <ThumbsDownIcon
+          class={`send-icon flex ${disableIcon ? 'hidden' : ''}`.trim()}
+          style={{ color: feedbackColor ?? defaultFeedbackColor }}
+        />
       </Show>
+      {children ? <span class="sr-only">{children}</span> : null}
     </button>
   );
 };

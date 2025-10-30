@@ -9,21 +9,33 @@ type FileUploadButtonProps = {
   disableIcon?: boolean;
 } & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
+const defaultButtonColor = '#3B81F6';
+
 export const AttachmentUploadButton = (props: FileUploadButtonProps) => {
+  const {
+    buttonColor,
+    isDisabled,
+    isLoading,
+    children,
+    class: className,
+    ['aria-label']: ariaLabelProp,
+    ...rest
+  } = props;
+  const ariaLabel = ariaLabelProp ?? 'Datei hochladen';
+
   return (
     <button
       type="submit"
-      disabled={props.isDisabled || props.isLoading}
-      {...props}
-      class={
-        'py-2 pl-4 pr-0 justify-center font-semibold focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
-        props.class
-      }
+      disabled={isDisabled || isLoading}
+      aria-label={ariaLabel}
+      {...rest}
+      class={`py-2 pl-4 pr-0 justify-center font-semibold focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ${className ?? ''}`.trim()}
       style={{ background: 'transparent', border: 'none' }}
     >
-      <Show when={!props.isLoading} fallback={<Spinner class="text-white" />}>
-        <AttachmentIcon color={props.buttonColor} />
+      <Show when={!isLoading} fallback={<Spinner class="text-white" />}>
+        <AttachmentIcon style={{ color: buttonColor ?? defaultButtonColor }} />
       </Show>
+      {children ? <span class="sr-only">{children}</span> : null}
     </button>
   );
 };

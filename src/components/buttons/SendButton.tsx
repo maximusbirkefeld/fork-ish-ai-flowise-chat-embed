@@ -9,44 +9,74 @@ type SendButtonProps = {
   disableIcon?: boolean;
 } & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
+const defaultSendButtonColor = '#3B81F6';
+
 export const SendButton = (props: SendButtonProps) => {
-  return (
-    <button
-      type="submit"
-      disabled={props.isDisabled || props.isLoading}
-      {...props}
-      class={
-        'py-2 px-4 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
-        props.class
-      }
-      style={{ background: 'transparent', border: 'none' }}
-    >
-      <Show when={!props.isLoading} fallback={<Spinner class="text-white" />}>
-        <SendIcon color={props.sendButtonColor} class={'send-icon flex ' + (props.disableIcon ? 'hidden' : '')} />
-      </Show>
-    </button>
-  );
-};
-export const DeleteButton = (props: SendButtonProps) => {
-  // Check if <flowise-fullchatbot> is present in the DOM
-  const isFullChatbot = document.querySelector('flowise-fullchatbot') !== null;
-  const paddingClass = isFullChatbot ? 'px-4' : 'px-12';
+  const {
+    sendButtonColor,
+    isDisabled,
+    isLoading,
+    disableIcon,
+    children,
+    class: className,
+    ['aria-label']: ariaLabelProp,
+    ...rest
+  } = props;
+  const ariaLabel = ariaLabelProp ?? 'Nachricht senden';
 
   return (
     <button
       type="submit"
-      disabled={props.isDisabled || props.isLoading}
-      {...props}
-      class={
-        `py-2 ${paddingClass} justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ` +
-        props.class
-      }
+      disabled={isDisabled || isLoading}
+      aria-label={ariaLabel}
+      {...rest}
+      class={`py-2 px-4 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ${className ?? ''}`.trim()}
+      style={{ background: 'transparent', border: 'none' }}
+    >
+      <Show when={!isLoading} fallback={<Spinner class="text-white" />}>
+        <SendIcon
+          class={`send-icon flex ${disableIcon ? 'hidden' : ''}`.trim()}
+          style={{ color: sendButtonColor ?? defaultSendButtonColor }}
+        />
+      </Show>
+      {children ? <span class="sr-only">{children}</span> : null}
+    </button>
+  );
+};
+
+export const DeleteButton = (props: SendButtonProps) => {
+  // Check if <flowise-fullchatbot> is present in the DOM
+  const isFullChatbot = document.querySelector('flowise-fullchatbot') !== null;
+  const paddingClass = isFullChatbot ? 'px-4' : 'px-12';
+  const {
+    sendButtonColor,
+    isDisabled,
+    isLoading,
+    disableIcon,
+    children,
+    class: className,
+    ['aria-label']: ariaLabelProp,
+    ...rest
+  } = props;
+  const ariaLabel = ariaLabelProp ?? 'Chat zurücksetzen';
+
+  return (
+    <button
+      type="submit"
+      disabled={isDisabled || isLoading}
+      aria-label={ariaLabel}
+      {...rest}
+      class={`py-2 ${paddingClass} justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ${className ?? ''}`.trim()}
       style={{ background: 'transparent', border: 'none' }}
       title="Reset Chat"
     >
-      <Show when={!props.isLoading} fallback={<Spinner class="text-white" />}>
-        <DeleteIcon color={props.sendButtonColor} class={'send-icon flex ' + (props.disableIcon ? 'hidden' : '')} />
+      <Show when={!isLoading} fallback={<Spinner class="text-white" />}>
+        <DeleteIcon
+          class={`send-icon flex ${disableIcon ? 'hidden' : ''}`.trim()}
+          style={{ color: sendButtonColor ?? defaultSendButtonColor }}
+        />
       </Show>
+      {children ? <span class="sr-only">{children}</span> : null}
     </button>
   );
 };
