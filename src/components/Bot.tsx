@@ -290,14 +290,16 @@ const FeedbackDialog = (props: {
 
           <div class="flex justify-center space-x-4">
             <button
-              class="font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+              class="font-bold py-2 px-6 rounded chatbot-button chatbot-focus-ring"
               style={{ background: '#ef4444', color: 'white' }}
               onClick={props.onClose}
             >
               Cancel
             </button>
             <button
-              class="font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+              class="font-bold py-2 px-6 rounded chatbot-button chatbot-focus-ring"
               style={{ background: '#3b82f6', color: 'white' }}
               onClick={props.onSubmit}
             >
@@ -437,7 +439,7 @@ const FormInputView = (props: {
             <div class="pt-4">
               <button
                 type="submit"
-                class="w-full py-2 px-4 text-white font-semibold rounded-md focus:outline-none transition duration-300 ease-in-out"
+                class="w-full py-2 px-4 text-white font-semibold rounded-md transition duration-300 ease-in-out chatbot-button chatbot-focus-ring"
                 style={{
                   'background-color': props.sendButtonColor || '#3B81F6',
                 }}

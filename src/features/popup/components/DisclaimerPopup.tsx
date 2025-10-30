@@ -66,7 +66,8 @@ export const DisclaimerPopup = (props: DisclaimerPopupProps) => {
 
           <div class="flex justify-center space-x-4">
             <button
-              class="font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+              class="font-bold py-2 px-6 rounded chatbot-button chatbot-focus-ring"
               style={{ background: popupProps.buttonColor || '#3b82f6', color: popupProps.buttonTextColor || 'white' }}
               onClick={handleAccept}
             >
@@ -76,7 +77,8 @@ export const DisclaimerPopup = (props: DisclaimerPopupProps) => {
             {/* Only show the Cancel button if not in full-page mode */}
             <Show when={!popupProps.isFullPage}>
               <button
-                class="font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                type="button"
+                class="font-bold py-2 px-6 rounded chatbot-button chatbot-focus-ring"
                 style={{ background: popupProps.denyButtonBgColor || '#ef4444', color: popupProps.buttonTextColor || 'white' }}
                 onClick={handleDeny}
               >
