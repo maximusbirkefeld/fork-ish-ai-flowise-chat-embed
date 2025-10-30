@@ -16,7 +16,7 @@ export const CancelLeadCaptureButton = (props: LeadCaptureButtonProps) => {
       disabled={props.isDisabled || props.isLoading}
       {...props}
       class={
-        'h-10 p-2 justify-center font-semibold focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 ' +
+        'h-10 p-2 justify-center font-semibold flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button chatbot-focus-ring ' +
         props.class
       }
       style={{ background: 'transparent', border: 'none', color: props.buttonColor }}

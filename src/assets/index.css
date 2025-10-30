@@ -127,6 +127,16 @@ textarea {
   font-weight: 300;
 }
 
+.chatbot-button:focus-visible,
+.chatbot-focus-ring:focus-visible,
+.chatbot-launcher:focus-visible,
+.file-annotation-button:focus-visible {
+  outline: 3px solid #111827;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(59, 129, 246, 0.45);
+  transition: outline-offset 150ms ease, box-shadow 150ms ease;
+}
+
 .slate-a {
   text-decoration: underline;
 }

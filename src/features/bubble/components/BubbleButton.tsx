@@ -91,9 +91,11 @@ export const BubbleButton = (props: Props) => {
         part="button"
         role="button"
         aria-label={buttonAriaLabel}
+        aria-expanded={props.isBotOpened}
         onClick={handleButtonClick}
         onMouseDown={onMouseDown}
-        class={`fixed shadow-md rounded-full hover:scale-110 active:scale-95 transition-transform duration-200 flex justify-center items-center animate-fade-in`}
+        type="button"
+        class={`fixed shadow-md rounded-full hover:scale-110 active:scale-95 transition-transform duration-200 flex justify-center items-center animate-fade-in chatbot-launcher chatbot-focus-ring`}
         style={{
           'background-color': props.backgroundColor ?? defaultButtonColor,
           'z-index': 42424242,
