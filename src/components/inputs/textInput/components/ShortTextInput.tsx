@@ -6,12 +6,13 @@ type ShortTextInputProps = {
   onInput: (value: string) => void;
   fontSize?: number;
   disabled?: boolean;
+  ariaLabel?: string;
 } & Omit<JSX.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onInput'>;
 
 const DEFAULT_HEIGHT = 56;
 
 export const ShortTextInput = (props: ShortTextInputProps) => {
-  const [local, others] = splitProps(props, ['ref', 'onInput']);
+  const [local, others] = splitProps(props, ['ref', 'onInput', 'ariaLabel']);
   const [height, setHeight] = createSignal(56);
 
   // @ts-expect-error: unknown type
@@ -44,6 +45,7 @@ export const ShortTextInput = (props: ShortTextInputProps) => {
       ref={props.ref}
       class="focus:outline-none bg-transparent px-4 py-4 flex-1 w-full h-full min-h-[56px] max-h-[128px] text-input disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 "
       disabled={props.disabled}
+      aria-label={local.ariaLabel}
       style={{
         'font-size': props.fontSize ? `${props.fontSize}px` : '16px',
         resize: 'none',
